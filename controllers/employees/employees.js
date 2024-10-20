@@ -65,6 +65,11 @@ export const findAllEmployees = async ( req, res ) => {
             return res.status( 204 ).send( "Employee Data is Empty, No data available to show." )
         } else {
             const activeEmployees = employeesData.filter( employee => employee.isActive === true );
+
+            if( activeEmployees.length === 0 ){
+                return res.status( 400 ).send({ Error: `No employee Found.` });
+            };
+
             return res.status( 200 ).send({
                 message: "Fetched Data Successfully!",
                 data: activeEmployees,

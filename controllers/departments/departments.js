@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 
 export const createDepartment = async ( req, res ) => {
     try {
-        if( !req.body || Object.keys(req.body).length === 0 ){
+        if( Object.keys(req.body).length === 0 ){
             return res.status( 400 ).send({ Error: "BAD REQUEST." });
         };
 
@@ -52,6 +52,11 @@ export const getAllDepartments = async ( req, res ) => {
             return res.status( 404 ).send({ Error: "No Data Found against Departments."});
         } else {
             const allActiveDepartments = departmentsData.filter( department => department.isActive === true );
+
+            if( allActiveDepartments.length === 0 ){
+                return res.status( 400 ).send({ Error: `No department Found.` });
+            };
+
             return res.status( 200 ).send({
                 messgae: "Departments Found Successfully!",
                 data: allActiveDepartments
@@ -65,7 +70,7 @@ export const getAllDepartments = async ( req, res ) => {
 
 export const getDepartmentById = async ( req, res ) => {
     try {
-        if( !req.params || Object.keys(req.params).length === 0 ){
+        if( Object.keys(req.params).length === 0 ){
             return res.status( 400 ).send({ Error: "BAD REQUEST." });
         };
 
@@ -76,6 +81,10 @@ export const getDepartmentById = async ( req, res ) => {
         }
 
         const allActiveDepartments = departmentsData.filter( department => department.isActive === true );
+
+        if( allActiveDepartments.length === 0 ){
+            return res.status( 400 ).send({ Error: `No department Found with this id ${id}.` });
+        }
 
         const departmentSearch = allActiveDepartments.find( department => department.id === id );
 
@@ -94,7 +103,7 @@ export const getDepartmentById = async ( req, res ) => {
 
 export const updateDepartmentById = async ( req, res ) => {
     try {
-        if( !req.params || Object.keys(req.params).length === 0 ){
+        if( Object.keys(req.params).length === 0 ){
             return res.status( 400 ).send({ Error: "BAD REQUEST." });
         };
 
