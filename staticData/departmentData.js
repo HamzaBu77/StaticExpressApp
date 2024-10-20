@@ -1,33 +1,40 @@
+import { v4 as uuidv4 } from 'uuid';
+
 const departments = [
     {
-        id: 1,
+        id: uuidv4(),
         departmentName: "Software Engineering",
         location: "Cabin A",
-        createdDate: "2020-01-01"
+        createdDate: new Date( Date.now() ).toISOString().split( 'T' )[0],
+        isActive: true
     },
     {
-        id: 2,
+        id: uuidv4(),
         departmentName: "Project Management",
         location: "Cabin B",
-        createdDate: "2021-01-15"
+        createdDate: new Date( Date.now() ).toISOString().split( 'T' )[0],
+        isActive: true
     },
     {
-        id: 3,
+        id: uuidv4(),
         departmentName: "Human Resources",
         location: "Cabin C",
-        createdDate: "2019-05-25"
+        createdDate: new Date( Date.now() ).toISOString().split( 'T' )[0],
+        isActive: true
     },
     {
-        id: 4,
+        id: uuidv4(),
         departmentName: "Sales",
         location: "Cabin D",
-        createdDate: "2022-02-10"
+        createdDate: new Date( Date.now() ).toISOString().split( 'T' )[0],
+        isActive: true
     },
     {
-        id: 5,
+        id: uuidv4(),
         departmentName: "Marketing",
         location: "Cabin E",
-        createdDate: "2021-06-20"
+        createdDate: new Date( Date.now() ).toISOString().split( 'T' )[0],
+        isActive: true
     }
 ];
 

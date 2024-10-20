@@ -107,23 +107,19 @@ export const updateEmployeeById = async ( req, res ) => {
             return res.status( 400 ).send({ Error: "BAD REQUEST." });
         }
 
-        console.log("Body",req.body);
-
         const { id } = req.params;
         const findIndexOfEmployee = employeesData.findIndex( employee => employee.id === id );
-
-        console.log("finindex",findIndexOfEmployee)
 
         if( findIndexOfEmployee < 0 ){
             return res.status(400).send({ Error: "No Employee Found with the corresponding ID." });
         } else if( req.body.id ){
-            return res.status(401).send({ Error: "You dont have right to update your Id." })
+            return res.status(401).send({ Error: "No rights to update Id." })
         } else if( req.body.departmentId ){
-            return res.status(401).send({ Error: "You dont have rights to change your department ID." })
+            return res.status(401).send({ Error: "No rights to change department ID." })
         } else if(req.body.hireDate) {
-            return res.status(401).send({ Error: "You dont have rights to change you hire date." })
+            return res.status(401).send({ Error: "No rights to change hire date." })
         } else if( req.body.isActive ) {
-            return res.status(401).send({ Error: "Don't have access to update isActive field." })
+            return res.status(401).send({ Error: "No rights to update isActive field." })
         }
 
         req.body.firstName ? employeesData[findIndexOfEmployee].firstName = req.body.firstName : null ;
@@ -133,7 +129,6 @@ export const updateEmployeeById = async ( req, res ) => {
         req.body.position ? employeesData[findIndexOfEmployee].position = req.body.position : null ; 
         req.body.salary ? employeesData[findIndexOfEmployee].salary = req.body.salary : null ;
 
-        console.log(employeesData[findIndexOfEmployee]);
         res.status(200).send({
             message: "Employee Updated Successfully!",
             data: employeesData[findIndexOfEmployee]

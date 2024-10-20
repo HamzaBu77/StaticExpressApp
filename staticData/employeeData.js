@@ -1,6 +1,8 @@
+import { v4 as uuidv4 } from 'uuid';
+
 const employees = [
     {
-        id: 1,
+        id:uuidv4(),
         firstName: "John",
         lastName: "Doe",
         email: "john.doe@example.com",
@@ -12,7 +14,7 @@ const employees = [
         isActive: true
     },
     {
-        id: 2,
+        id:uuidv4(),
         firstName: "Jane",
         lastName: "Smith",
         email: "jane.smith@example.com",
@@ -24,7 +26,7 @@ const employees = [
         isActive: true
     },
     {
-        id: 3,
+        id:uuidv4(),
         firstName: "Emily",
         lastName: "Johnson",
         email: "emily.johnson@example.com",
@@ -36,7 +38,7 @@ const employees = [
         isActive: true
     },
     {
-        id: 4,
+        id:uuidv4(),
         firstName: "Michael",
         lastName: "Brown",
         email: "michael.brown@example.com",
@@ -48,7 +50,7 @@ const employees = [
         isActive: true
     },
     {
-        id: 5,
+        id:uuidv4(),
         firstName: "Sarah",
         lastName: "Davis",
         email: "sarah.davis@example.com",
@@ -60,7 +62,7 @@ const employees = [
         isActive: true
     },
     {
-        id: 6,
+        id:uuidv4(),
         firstName: "David",
         lastName: "Wilson",
         email: "david.wilson@example.com",
@@ -72,7 +74,7 @@ const employees = [
         isActive: true
     },
     {
-        id: 7,
+        id:uuidv4(),
         firstName: "Jessica",
         lastName: "Martinez",
         email: "jessica.martinez@example.com",
@@ -84,7 +86,7 @@ const employees = [
         isActive: true
     },
     {
-        id: 8,
+        id:uuidv4(),
         firstName: "Daniel",
         lastName: "Anderson",
         email: "daniel.anderson@example.com",
@@ -96,7 +98,7 @@ const employees = [
         isActive: true
     },
     {
-        id: 9,
+        id:uuidv4(),
         firstName: "Laura",
         lastName: "Thomas",
         email: "laura.thomas@example.com",
@@ -108,7 +110,7 @@ const employees = [
         isActive: true
     },
     {
-        id: 10,
+        id: uuidv4(),
         firstName: "Kevin",
         lastName: "Jackson",
         email: "kevin.jackson@example.com",
