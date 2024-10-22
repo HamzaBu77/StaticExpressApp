@@ -1,22 +1,19 @@
-import dotenv from "dotenv";
-dotenv.config();
-import express from "express";
-import { v4 as uuidv4 } from "uuid";
-import employeeData from "./staticData/employeeData.js";
-import departmentsData from "./staticData/departmentData.js";
-import employeeRouter from "./routes/employees.routes.js";
-import departmentRouter from "./routes/departments.js";
-import dashboardRouter from "./routes/dashboard.js";
+import DotEnv from 'dotenv'
+DotEnv.config()
+import Express from 'express'
+import EmployeeRouter from './routes/employees.routes.js'
+import DepartmentRouter from './routes/departments.routes.js'
+import DashboardRouter from './routes/dashboard.routes.js'
 
-const app = express();
-const port = process.env.PORT;
+const app = Express()
+const port = process.env.PORT
 
-app.use(express.json());
+app.use(Express.json())
 
-app.use( "/employee", employeeRouter );
-app.use( "/department", departmentRouter );
-app.use( "/dashboard", dashboardRouter );
+app.use('/employees', EmployeeRouter)
+app.use('/departments', DepartmentRouter)
+app.use('/dashboard', DashboardRouter)
 
-app.listen( port, () => {
-    console.log( `Server running on port ${port}.` )
-});
+app.listen(port, () => {
+    console.log(`Server running on port ${port}.`)
+})
