@@ -118,6 +118,10 @@ export const listEmployeesByDepartmentId = async (req, res) => {
                 message: 'Employees found with corresponding hire date.',
                 data: employeeByHireDate,
             })
+        } else {
+            return res.status(400).send({
+                Error: 'Query Doenot Match any .',
+            })
         }
 
         if (departmentIsActiveOrNot.length === 0) {
