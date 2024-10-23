@@ -131,54 +131,6 @@ export const show = async (req, res) => {
     }
 }
 
-export const showByName = async (req, res) => {
-    try {
-        if (Object.keys(req.params).length === 0) {
-            return res.status(400).send({ Error: 'BAD REQUEST.' })
-        }
-
-        const { departmentName } = req.params
-
-        if (!departmentName) {
-            return res
-                .status(400)
-                .send({ Error: 'Department is empty or null.' })
-        }
-
-        const allActiveDepartments = DepartmentRecord.departments.filter(
-            (department) => department.isActive === true
-        )
-
-        if (allActiveDepartments.length === 0) {
-            return res.status(400).send({
-                Error: `No department Found with this department name ${departmentName}.`,
-            })
-        }
-
-        const searchRecord = allActiveDepartments.filter((department) =>
-            department.departmentName
-                .toLowerCase()
-                .includes(departmentName.toLowerCase())
-        )
-
-        if (!searchRecord) {
-            return res.status(404).send({
-                Error: `Department not Found with department name ${departmentName}`,
-            })
-        }
-
-        res.status(200).send({
-            mesasge: 'Department Found Successfully!',
-            data: searchRecord,
-        })
-    } catch (error) {
-        res.status(500).send({
-            message: 'Internal Server Error.',
-            Error: error.message,
-        })
-    }
-}
-
 export const patch = async (req, res) => {
     try {
         if (Object.keys(req.params).length === 0) {

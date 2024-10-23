@@ -72,7 +72,7 @@ export const list = async (req, res) => {
     try {
         if (!EmployeeRecord.employees) {
             return res
-                .status()
+                .status(400)
                 .send('Employee Data is Empty, No data available to show.')
         } else {
             const activeEmployees = EmployeeRecord.employees.filter(
@@ -98,29 +98,30 @@ export const list = async (req, res) => {
 
 export const show = async (req, res) => {
     try {
-        const { id } = req.params
+        const params = req.params
 
-        if (!id) {
+        if (!params?.id) {
             return res.status(400).send({ Error: 'Id cannot be empty.' })
         }
 
         const activeEmployees = EmployeeRecord.employees.filter(
-            (employee) => employee.isActive === true
+            (employee) =>
+                employee.isActive === true && employee?.id === params?.id
         )
 
-        if (activeEmployees.length === 0) {
-            return res.status(400).send({ Error: 'Employee Record is Empty.' })
-        }
+        // if (activeEmployees.length === 0) {
+        //     return res.status(400).send({ Error: 'Employee Record is Empty.' })
+        // }
 
-        const employee = activeEmployees.filter(
-            (employee) => employee.id === id
-        )
+        // const employee = activeEmployees.filter(
+        //     (employee) => employee.id === id
+        // )
 
-        if (employee.length === 0) {
-            return res.status(400).send({
-                Error: `Bad Request, No Employee existed with this id.`,
-            })
-        }
+        // if (employee.length === 0) {
+        //     return res.status(400).send({
+        //         Error: `Bad Request, No Employee existed with this id.`,
+        //     })
+        // }
 
         return res
             .status(200)
@@ -150,22 +151,22 @@ export const patch = async (req, res) => {
             return res.status(400).send({ Error: 'Employee Record is Empty.' })
         }
 
+        const allActiveDepartments = DepartmentRecord.departments.filter(
+            (department) => department.isActive === true
+        )
+
         const record = activeEmployees.find((employee) => employee.id === id)
 
-        if (Object.keys(record).length === 0) {
+        if (record === undefined) {
             return res
                 .status(400)
                 .send({ Error: 'No Employee Found with the corresponding ID.' })
         } else if (Object.keys(body).length === 0) {
             return res.status(400).send({ Error: 'No Data to patch.' })
-        } else if (JSON.stringify(record) === JSON.stringify(body)) {
-            return res
-                .status(409)
-                .send({ Error: 'No value provided is changed' })
         }
 
         if (body?.departmentId) {
-            const checkDepartmentExist = DepartmentRecord.departments.filter(
+            const checkDepartmentExist = allActiveDepartments.filter(
                 (department) => department.id === body.departmentId
             )
             if (checkDepartmentExist.length === 0) {
@@ -186,7 +187,10 @@ export const patch = async (req, res) => {
             data: record,
         })
     } catch (error) {
-        res.status(500).send({ message: `Internal Server Error`, Error: error })
+        res.status(500).send({
+            message: `Internal Server Error`,
+            Error: error.message,
+        })
     }
 }
 
